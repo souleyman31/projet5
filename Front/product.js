@@ -2,7 +2,7 @@
 const siteUrl = new URL(window.location.href);
 const id = siteUrl.searchParams.get("id");
 const url = "http://localhost:3000/api/teddies/";
-console.log(id);
+// console.log(id);
 
 // FETCH FONCTION
 
@@ -207,12 +207,13 @@ const addArticleToList = teddy => {
 			// window.location.href = "#";
 
 			showAlert("Le produit a été ajouté au panier", "success text-center");
+			storageArticle(teddy);
 		} else {
 			window.location.href = "#";
 			showAlert("Le produit n'a pas été ajouté au panier", "danger text-center");
 		}
 
-		storageArticle(teddy);
+		// storageArticle(teddy); /*** ATTENTION JE L AI RAJOUTE A L IF */
 	});
 
 	//FIN CODAGE
@@ -224,7 +225,8 @@ const storageArticle = teddy => {
 	let select = document.getElementById("choice");
 	const quantityArticles = document.getElementById("textbox1").value;
 
-	const storeArticles = {
+	let storeArticles;
+	storeArticles = {
 		id: teddy._id,
 		image: teddy.imageUrl,
 		name: teddy.name,
@@ -232,11 +234,55 @@ const storageArticle = teddy => {
 		price: teddy.price * parseInt(quantityArticles),
 		quantity: parseInt(quantityArticles)
 	};
+	console.log(storeArticles.id);
+
+	// /**** */
+	// addProduct({ id: teddy._id, quantity: parseInt(quantityArticles) });
+	// function addProduct(product) {
+	// 	// console.log(product);
+	// 	// console.log(storeArticles.id);
+
+	// 	let productAlreadyInCart = false;
+
+	// 	if (storeArticles.id === product.id) {
+	// 		productAlreadyInCart = true;
+	// 		storeArticles.quantity += product.quantity;
+	// 	}
+	// 	console.log(productAlreadyInCart);
+	// 	if (productAlreadyInCart === false) {
+	// 		storeArticles.push(product);
+	// 	}
+	// 	console.log(storeArticles);
+	// }
+	/***** */
+
+	/*** */
 
 	//Creation user-cart in the localstorage
 	//GET ARTICLES
 	const teddies = JSON.parse(localStorage.getItem("panier")) || [];
 	//ADD ARTICLES
-	teddies.push(storeArticles);
-	localStorage.setItem("panier", JSON.stringify(teddies));
+	// teddies.push(storeArticles);
+	/***** */ /******** dont touch */
+
+	/**** */
+	/**** */
+	// console.log(teddies);
+	// console.log(storeArticles);
+	var productAlreadyInCart = false;
+	function addProduct() {
+		for (let i = 0; i < teddies.length; i++) {
+			if (teddies[i].id === storeArticles.id) {
+				console.log("ok");
+				console.log(productAlreadyInCart);
+				productAlreadyInCart = true;
+				teddies[i].quantity += storeArticles.quantity;
+			}
+		}
+		if (productAlreadyInCart === false) {
+			teddies.push(storeArticles);
+		}
+		localStorage.setItem("panier", JSON.stringify(teddies));
+	}
+	addProduct();
 };

@@ -3,7 +3,7 @@ let cart = JSON.parse(localStorage.getItem("panier"));
 // console.log(cart);
 
 // DISPLAY ARTICLES
-const list = document.getElementById("article-list");
+let list = document.getElementById("article-list");
 
 //BUTTON DELETE
 const deleteArticle = el => {
@@ -34,25 +34,29 @@ const deleteArticleLocalstorage = name => {
 
 	//DOWNLOAD PAGE AFTER REMOVE
 	// showAlert("L'article a été bien supprimé", "info");
-	window.location.href = "cart1.html";
+	window.location.href = "cart.html";
 };
 
 //SI LE PANIER EST VIDE
-if (cart === null) {
-	// console.log("vide");
 
-	let emptyCart = `
+if (cart === null) {
+	console.log("vide");
+	const emptyCart = `
 	<div>
 	<div> Le panier est vide </div>
-
 	</div>
 	`;
 	list.innerHTML = emptyCart;
 } else {
 	let notEmpty = [];
 	// console.log("Pas vide");
-	for (let i = 0; i < cart.length; i++) {
+
+	for (i = 0; i < cart.length; i++) {
 		// console.log(cart.length);
+		// console.log(cart);
+
+		console.log(cart[i].id);
+
 		notEmpty =
 			notEmpty +
 			`
@@ -66,10 +70,9 @@ if (cart === null) {
 		`;
 	}
 
-	if ((i = cart.length)) {
+	if (i == cart.length) {
 		list.innerHTML = notEmpty;
 	}
-	// list.innerHTML = notEmpty;
 }
 
 //BUTTON CLEAR CART
@@ -82,7 +85,7 @@ const clearCart = document.querySelector(".clearCart");
 clearCart.addEventListener("click", () => {
 	if (confirm(` Souhaitez-vous vider votre panier?`)) {
 		localStorage.removeItem("panier");
-		window.location.href = "cart1.html";
+		window.location.href = "cart.html";
 		showAlert(" Votre panier a été vidé", "success text-center");
 	} else {
 		window.location.href = "#";
@@ -104,7 +107,7 @@ function showAlert(message, className) {
 //CALCUL DU PRIX TOTAL
 let priceCart = [];
 for (let i = 0; i < cart.length; i++) {
-	priceCartTotal = cart[i].price;
+	priceCartTotal = cart[i].price * cart[i].quantity;
 	priceCart.push(priceCartTotal);
 }
 
