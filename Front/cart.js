@@ -298,6 +298,7 @@ document.getElementById("book-form").addEventListener("submit", e => {
 	} else {
 		const myBook = new Book(firstName, lastName, email, address, cp, country);
 		UI.addArticleToList(myBook);
+		console.log(myBook);
 		Store.addArticle(myBook);
 		UI.showAlert("Vos coordonnées sont validées", "success");
 		UI.clearFields();
@@ -340,7 +341,7 @@ document.getElementById("book-form").addEventListener("submit", e => {
 				"Content-type": "application/json"
 			}
 		});
-		console.log(post);
+		// console.log(post);
 
 		/**Pour voir le resultat du serveur dans la console */
 		post.then(async response => {
@@ -354,7 +355,6 @@ document.getElementById("book-form").addEventListener("submit", e => {
 					localStorage.setItem("responseId", contenu.articles[0]);
 					/**aller vers la page order.html */
 					window.location = "order.html";
-					// window.location = "#";
 				} else {
 					console.log(` reponse du serveur : ${response.status}`);
 				}
@@ -366,25 +366,6 @@ document.getElementById("book-form").addEventListener("submit", e => {
 
 		/**** */
 	}
-
-	/****  VERY GOOD*/
-	//ENVOI DES DONNEES AU SERVEUR
-	// 	fetch("https://jsonplaceholder.typicode.com/posts", {
-	// 		method: "POST",
-	// 		headers: {
-	// 			Accept: "application/JSON, text/plain, */*",
-	// 			"Content-type": "application/json"
-	// 		},
-	// 		// body: JSON.stringify(add)
-	// 		body: JSON.stringify({ articles: articles, contact: contact, totalPrice: totalPrice })
-	// 	})
-	// 		.then(res => res.json())
-	// 		.then(data => {
-	// 			console.log(data);
-	// 		});
-	// });
-	/** */
-	/*** */
 });
 
 //DELETE

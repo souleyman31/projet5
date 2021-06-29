@@ -155,7 +155,7 @@ const addArticleToList = teddy => {
 		// console.log(teddyColors[i]);
 	}
 
-	//BOUTON CLICK MINUS AND PLUS
+	//BUTTON CLICK MINUS AND PLUS
 	document.getElementById("page").addEventListener("click", () => {
 		const box1 = document.getElementById("textbox1");
 		const itemval1 = document.getElementById("itemval1");
@@ -236,39 +236,10 @@ const storageArticle = teddy => {
 	};
 	console.log(storeArticles.id);
 
-	// /**** */
-	// addProduct({ id: teddy._id, quantity: parseInt(quantityArticles) });
-	// function addProduct(product) {
-	// 	// console.log(product);
-	// 	// console.log(storeArticles.id);
-
-	// 	let productAlreadyInCart = false;
-
-	// 	if (storeArticles.id === product.id) {
-	// 		productAlreadyInCart = true;
-	// 		storeArticles.quantity += product.quantity;
-	// 	}
-	// 	console.log(productAlreadyInCart);
-	// 	if (productAlreadyInCart === false) {
-	// 		storeArticles.push(product);
-	// 	}
-	// 	console.log(storeArticles);
-	// }
-	/***** */
-
-	/*** */
-
 	//Creation user-cart in the localstorage
 	//GET ARTICLES
 	const teddies = JSON.parse(localStorage.getItem("panier")) || [];
-	//ADD ARTICLES
-	// teddies.push(storeArticles);
-	/***** */ /******** dont touch */
 
-	/**** */
-	/**** */
-	// console.log(teddies);
-	// console.log(storeArticles);
 	var productAlreadyInCart = false;
 	function addProduct() {
 		for (let i = 0; i < teddies.length; i++) {

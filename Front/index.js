@@ -5,14 +5,12 @@ const myFetch = () => {
 	fetch(url)
 		.then(res => res.json())
 		.then(teddies => {
-			// console.log(teddies);
+			console.log(teddies);
 			teddies.forEach(teddy => addArticles(teddy));
-		});
-	// .catch(err => alert("Attention, nous avons déploré une erreur de saisie"));
+		})
+		.catch(err => alert("Attention, nous avons déploré une erreur de saisie"));
 };
 myFetch();
-
-// window.onload = myFetch; //Execute le script immediatement apres le chargement de la page
 
 const addArticles = teddy => {
 	if (teddy != null) {
